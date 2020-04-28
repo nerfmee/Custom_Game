@@ -1,0 +1,502 @@
+"DOTAAbilities"
+{
+"deflect"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_IGNORE_PSEUDO_QUEUE | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PHYSICAL"	
+		"MaxLevel"						"1"
+		"AbilityTextureName" "shield"
+		
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"2.0"
+
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		"OnSpellStart"
+		{	
+			"ApplyModifier"
+			{
+				"ModifierName" "deflect_modifier"
+				"Target" "CASTER"
+			}
+			
+			"FireSound"
+			{
+				"EffectName"			"Hero_TemplarAssassin.Refraction"
+			}
+		}
+
+
+
+
+		"OnProjectileHitUnit"
+		{
+			"RunScript"
+				{
+				"ScriptFile"   "scripts/vscripts/spells/return.lua"
+				"Function"     "on_hit"
+				}
+		}
+
+
+
+		
+		"Modifiers"
+		{
+			"deflect_modifier"
+			{
+				"Duration" "0.7"
+					"OnCreated"
+					{
+						"AttachEffect"
+						{
+						"Target" "CASTER"
+						"EffectName" "particles/econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_refraction.vpcf"
+						"EffectAttachType" "follow_origin"
+						"EffectLifeDurationScale" "1"
+							"ControlPointEntities"
+							{
+							"CASTER"    "attach_origin" // Control Point 0
+							"CASTER"    "attach_origin" // Control Point 1
+							}
+						}
+					}
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PHYSICAL"	"1"
+					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_MAGICAL"	"1"
+					"MODIFIER_PROPERTY_ABSOLUTE_NO_DAMAGE_PURE"	"1"
+				}   	
+			}
+		}
+		
+	}
+
+    "blink_w"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"queenofpain_blink"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES"
+		"AbilityTextureName"            "blink"
+		"MaxLevel"						"1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0.0"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"4.0"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"700"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_blink_range"		"0"
+			}
+		}
+	}
+	
+	"queenofpain_blink_datadriven"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_ROOT_DISABLES | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING | DOTA_ABILITY_BEHAVIOR_IMMEDIATE"
+		"AbilityTextureName"			"blink"
+		"MaxLevel"						"1"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_queenofpain.vsndevts"
+			"particle"			"particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
+			"particle"			"particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
+		}
+	
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"0"
+		"AbilityCastPoint"				"0"
+	
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"4"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"blink_range"			"700"
+			}
+			
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"min_blink_range"		"0"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"RunScript"
+			{
+				"ScriptFile"	"scripts/vscripts/heroes/hero_queenofpain/blink.lua"
+				"Function"		"Blink"
+				"Target"		"POINT"
+			}
+	
+			"FireSound"
+			{
+				"EffectName"	"Hero_QueenOfPain.Blink_out"
+				"Target"		"CASTER"
+			}
+	
+			"AttachEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_queenofpain/queen_blink_start.vpcf"
+				"Target"		"CASTER"
+				"EffectAttachType"	"attach_hitloc"
+			}
+	
+			"FireSound"
+			{
+				"EffectName"	"Hero_QueenOfPain.Blink_in"
+				"Target"		"CASTER"
+			}
+	
+			"AttachEffect"
+			{
+				"EffectName"	"particles/units/heroes/hero_queenofpain/queen_blink_end.vpcf"
+				"Target"		"CASTER"
+				"EffectAttachType"	"follow_origin"
+			}
+		}
+	}
+	
+    "sword_wave"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"						"ability_datadriven"
+		"AbilityTextureName"			"shockwave"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_POINT"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityCastAnimation" 			"ACT_DOTA_ATTACK_EVENT"
+		"MaxLevel"						"1"
+
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.3"
+		"AnimationPlaybackRate" "0.9"
+
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"2.0"
+		
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+
+		"OnSpellStart"
+		{
+			"LinearProjectile"
+			{
+				"Target"				"POINT"
+				"EffectName"			"particles\units\heroes\hero_magnataur\magnataur_shockwave.vpcf"
+				"MoveSpeed"				"1900"
+				"StartRadius"			"120"
+				"EndRadius"				"120"
+				"FixedDistance"  		"1200"
+				"TargetTeams"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+				"TargetTypes"			"DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_HERO"
+				"TargetFlags"			"DOTA_UNIT_TARGET_FLAG_NONE"
+				"HasFrontalCone"		"1"
+				"ProvidesVision"		"1"
+				"VisionRadius"			"400"
+			}
+			"FireSound"
+			{
+				"EffectName"			"Hero_Magnataur.ShockWave.Cast"
+				"Target"				"CASTER"
+			}
+			
+		}
+
+		
+		"OnProjectileHitUnit"
+		{
+			"DeleteOnHit"			"false"
+			"Damage"
+			{
+				"Damage"			"10000"
+				"Type"				"DAMAGE_TYPE_MAGICAL"
+				"Target"			"TARGET"
+			}
+			
+		}
+	}
+
+
+
+	"dagger_throw"
+	{
+		// General
+		//-------------------------------------------------------------------------------------------------------------
+		"BaseClass"				"ability_datadriven"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET | DOTA_ABILITY_BEHAVIOR_IGNORE_BACKSWING"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
+		"AbilityUnitDamageType"			"DAMAGE_TYPE_PURE"	
+		"AbilityType"					"DOTA_ABILITY_TYPE_ULTIMATE"
+		"AbilityTextureName"			"dagger2"
+		"MaxLevel"						"1"
+	
+		// Precache
+		//-------------------------------------------------------------------------------------------------------------
+		"precache"
+		{
+			"soundfile"			"soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+			"particle"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger.vpcf"
+			"particle"			"particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger_debuff.vpcf"
+		}
+	
+		// Casting
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCastRange"				"1200"
+		"AbilityCastPoint"				"0.2"
+		
+		// Time		
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityCooldown"				"5"
+		"AbilityDuration"				"3.0"
+	
+		// Cost
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilityManaCost"				"0"
+		
+		//Damage
+		"AbilityDamage"					"10000"
+			
+		// Special	
+		//-------------------------------------------------------------------------------------------------------------
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"move_slow"					"0"
+			}
+			"02"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"dagger_speed"			"1200"
+			}
+			"03"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"duration"				"0"
+			}
+			"04"
+			{
+				"var_type"				"FIELD_INTEGER"
+				"hero_dmg_pct"			"1000"
+			}
+		}
+	
+		"OnSpellStart"
+		{
+			"TrackingProjectile"
+			{
+				"Target"           "TARGET"  
+			    "EffectName"       "particles/econ/items/phantom_assassin/phantom_assassin_arcana_elder_smith/phantom_assassin_stifling_dagger_arcana.vpcf"      
+			    "Dodgeable"        "1"
+			    "ProvidesVision"   "0"
+			    "VisionRadius"     "0"
+			    "MoveSpeed"        "%dagger_speed"
+			    "SourceAttachment"  "DOTA_PROJECTILE_ATTACHMENT_ATTACK_1"
+			}
+	
+			"FireSound"
+			{
+				"EffectName"		"Hero_PhantomAssassin.Dagger.Cast"
+				"Target"			"CASTER"
+			}
+		}
+	
+		"OnProjectileHitUnit"
+		{
+			"Damage"
+			{
+				"Target"
+				{
+					"Center"	"TARGET"
+					"Types"		"DOTA_UNIT_TARGET_HERO"
+				}
+				"Type"			"DAMAGE_TYPE_PURE"
+				"Damage"		"100"
+			}
+	
+			"Damage"
+			{
+				"Target"
+				{
+					"Center"	"TARGET"
+					"Types"		"DOTA_UNIT_TARGET_BASIC"
+				}
+				"Type"			"DAMAGE_TYPE_PURE"
+				"Damage"		"100"
+			}
+	
+			"FireSound"
+			{
+				"EffectName"		"Hero_PhantomAssassin.Dagger.Target"
+				"Target"			"TARGET"
+			}
+	
+			"ApplyModifier"
+			{
+				"ModifierName"		"modifier_stifling_dagger_slow_datadriven"
+				"Target"			"TARGET"
+			}
+		}
+	
+		"Modifiers"
+		{
+			"modifier_stifling_dagger_slow_datadriven"
+			{
+				"IsDebuff"	"1"
+				"Duration"	"%duration"
+	
+				"EffectName"	"particles/units/heroes/hero_phantom_assassin/phantom_assassin_stifling_dagger_debuff.vpcf"
+				"EffectAttachType"	"follow_origin"
+	
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"		"%move_slow"
+				}
+			}
+		}
+	}
+
+		"blood_spatter"
+	{
+        // General
+        //-------------------------------------------------------------------------------------------------------------
+        "BaseClass"                             "ability_datadriven"
+        "AbilityBehavior"                       "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "AbilityTextureName"                    "phantom_assassin_coup_de_grace"
+        "MaxLevel"                                              "1"
+       
+        // Precache
+        //-------------------------------------------------------------------------------------------------------------
+        "precache"
+        {
+               "soundfile"                     "soundevents/game_sounds_heroes/game_sounds_phantom_assassin.vsndevts"
+               "particle"                      "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+        }
+       
+       
+       "Modifiers"
+       {
+       
+               "blood_spatter_modifier"
+                {
+                        "IsHidden"      "1"
+                        "Passive"       "1"
+       
+                       "OnDeath"
+                        {
+       
+                               "FireEffect"
+                                {
+                                        "EffectName"    "particles/units/heroes/hero_phantom_assassin/phantom_assassin_crit_impact.vpcf"
+                                        "EffectAttachType"      "start_at_customorigin"
+                                               
+                                        "ControlPointEntities"
+                                        {
+                                                "UNIT"        "follow_origin"
+                                                "UNIT"        "follow_origin"
+                                        }
+                                }
+       
+                                "FireSound"
+                                {
+                                        "EffectName"    "Hero_PhantomAssassin.CoupDeGrace"
+                                        "Target"
+                                        {
+                                                "Center"        "UNIT"
+                                                "Flags"         "DOTA_UNIT_TARGET_FLAG_DEAD"
+                                        }
+                                }
+                        }
+                }
+        }
+	}
+
+    "tempo"
+    {
+        "BaseClass"                     "ability_lua"
+        "ScriptFile"                    "abilities/tempo"
+
+        "AbilityBehavior"                       "DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+        "AbilityTextureName"            "tempo"
+        "MaxLevel"                      "1"
+
+        "AbilitySpecial"
+        {
+            "01"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "stacks_required"       "3"
+            }
+            "02"
+            {
+                "var_type"              "FIELD_INTEGER"
+                "stacks_from_kill"      "3"
+            }
+
+
+        }
+    }
+	
+
+
+
+
+}

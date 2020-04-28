@@ -1,0 +1,47 @@
+// Dota Heroes File
+// NOTE: This is not for creating new heroes, this is for taking a currently existing hero as a template and overriding
+// the specified key-value combinations.  Use override_hero <hero_to_override> for this.
+"DOTAHeroes"
+{
+	//=================================================================================================================
+	// HERO: Juggernaut
+	//=================================================================================================================
+	"npc_dota_hero_juggernaut"
+	{
+		"override_hero"				"npc_dota_hero_juggernaut"			// Hero to override
+		"Ability1"					"deflect"		// Ability 1
+		"Ability2"					"queenofpain_blink_datadriven"		// Ability 2
+		"Ability3"					"sword_wave"		// Ability 3	
+		"Ability4"					""		// Ability 4
+		"Ability5"					"dagger_throw"		// Ability 5
+		"Ability6"					"tempo"		// Ability 8     
+		"Ability7"					"blood_spatter"		// Ability 8     
+		
+	
+		
+		
+		
+		"VisionNighttimeRange"		"1800"										// Range of vision at night time.
+		"VisionDaytimeRange"		"1800"
+		"AttributeBaseStrength"		"0"			// Base strength
+		"AttributeStrengthGain"		"0"			// Strength bonus per level.
+		"AttributeBaseIntelligence"	"0"			// Base intelligence
+		"AttributeIntelligenceGain"	"0"			// Intelligence bonus per level.
+		"AttributeBaseAgility"		"0"			// Base agility
+		"AttributeAgilityGain"		"0"			// Agility bonus per level.	
+		"BountyXP"					"0"		// Experience earn.
+		"BountyGoldMin"				"0"		// Gold earned min.
+		"BountyGoldMax"				"0"		// Gold earned max.
+		"ArmorPhysical"				"0"		// Physical protection.
+		"MagicalResistance"			"0"			// Magical protection.
+		"MovementSpeed"				"500"			// Speed
+		"AttackDamageMin"			"10000"		// Damage range min.
+		"AttackDamageMax"			"10000"		// Damage range max.		
+		"StatusHealth"				"1"		// Base health.
+		"StatusHealthRegen"			"0"			// Health regeneration rate.
+		"StatusMana"				"1"			// Base mana.
+		"StatusManaRegen"			"0"			// Mana regeneration rate.
+		"MovementTurnRate"			"3.0"
+        "AttackRange"               "50"		
+	}
+}
